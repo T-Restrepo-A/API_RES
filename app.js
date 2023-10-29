@@ -41,5 +41,15 @@ app.get('/api_res/tbl_productos', (req,res)=>{
     });
 });
 
+app.get('/api_res/tbl_productos/:id', (req,res)=>{
+    conexion.query('SELECT * FROM tbl_productos WHERE id=?', [req.params.id] , (error,fila)=>{
+        if(error){
+            throw error;
+        }else{
+           res.send(fila);
+           res.send(fila[0].descripción);  // para traer un solo resgistro “ descripción”
+        }
+    });
+});
 
 
