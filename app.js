@@ -52,4 +52,15 @@ app.get('/api_res/tbl_productos/:id', (req,res)=>{
     });
 });
 
+app.post('/api_res/tbl_productos',(req,res)=>{
+    let data = {descripcion:req.body.descripcion, costo:req.body.costo};
+    let sql = "INSERT INTO tbl_productos SET ?";
+    conexion.query(sql, data, (error,results)=>{
+        if(error){
+            throw error;
+        }else{
+           res.send(results);
+        }
+    });
+});
 
