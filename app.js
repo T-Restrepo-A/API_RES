@@ -31,3 +31,15 @@ conexion.connect(function(error){
    }
 });
 
+app.get('/api_res/tbl_productos', (req,res)=>{
+    conexion.query('SELECT * FROM tbl_productos', (error,filas)=>{
+        if(error){
+            throw error;
+        }else{
+            res.send(filas);
+        }
+    });
+});
+
+
+
