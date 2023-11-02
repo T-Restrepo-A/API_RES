@@ -5,6 +5,11 @@ let app = express();
 
 app.use(express.json());
 
+app.post('/api_res/api', function(req,res){
+    res.send('/api_res/api');
+})
+
+
 
 app.listen('3000', function(){
     console.log('Servidor OK');
