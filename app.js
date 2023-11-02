@@ -5,11 +5,6 @@ let app = express();
 
 app.use(express.json());
 
-app.post('/api_res/api', function(req,res){
-    res.send('/api_res/api');
-})
-
-
 
 app.listen('3000', function(){
     console.log('Servidor OK');
@@ -69,3 +64,27 @@ app.post('/api_res/tbl_productos',(req,res)=>{
     });
 });
 
+app.put('/api_res/tbl_productos/:id',(req,res)=>{
+    const id=req.params.id;
+    const data= {descripcion:req.body.descripcion, costo:req.body.costo}
+    const sql= `UPDATE PRODUCTO SET ? WHERE ID= ${id}`;
+    conexion.query(sql, data, (error,results)=>{
+        if(error){
+            throw error;
+        }else{
+           res.send({message: 'Producto actualizado'});
+        }
+    });
+});
+
+app.put('/api_res/tbl_productos/:id',(req,res)=>{
+    const id=req.params.id;
+    const sql= `DELETE FROM tbl_productos WHERE id= ${id}`;
+    conexion.query(sql, data, (error,results)=>{
+        if(error){
+            throw error;
+        }else{
+           res.send({message: 'Producto eliminado'});
+        }
+    });
+});
